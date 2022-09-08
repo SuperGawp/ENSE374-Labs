@@ -1,5 +1,1 @@
-<<<<<<< HEAD
 darkest timeline
-=======
-best timeline
->>>>>>> main

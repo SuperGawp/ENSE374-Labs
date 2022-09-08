@@ -9,4 +9,4 @@ This respository contains all the lab work done for the first lab.
 - Harry Potter Series
 - The Hobbiton Series
 
-[title](https://www.instagram.com/soupergawp/) - My Instagram Account
+[My Instagram Account](https://www.instagram.com/soupergawp/)

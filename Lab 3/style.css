@@ -1,0 +1,29 @@
+.title{
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 40px;
+}
+
+.center {
+    background-color: aliceblue;
+    margin: auto;
+    width: 18%;
+    padding-bottom: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.todoCenter{
+    background-color: aliceblue;
+    margin: auto;
+    width: 30%;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.bluecolour{
+    color: blue;
+    text-decoration: underline;
+}

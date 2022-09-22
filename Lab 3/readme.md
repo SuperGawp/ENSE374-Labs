@@ -1,3 +1,3 @@
-Welcome to My Lab 2 Work!
+Welcome to My Lab 3 Work!
 
-This respository contains all the lab work done for the second lab.
+This respository contains all the lab work done for the third lab.

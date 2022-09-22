@@ -4,7 +4,7 @@
     text-align: center;
     margin-top: 100px;
     margin-bottom: 40px;
-    font-family: Poppins;
+    font-family: 'Poppins';
 }
 
 .center {
@@ -14,7 +14,7 @@
     padding-bottom: 15px;
     text-align: center;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    font-family: Poppins;
+    font-family: 'Poppins';
 }
 
 .todoCenter{
@@ -25,11 +25,11 @@
     padding-bottom: 15px;
     text-align: center;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    font-family: Poppins;
+    font-family: 'Poppins';
 }
 
 .bluecolour{
     color: blue;
     text-decoration: underline;
-    font-family: Poppins;
+    font-family: 'Poppins';
 }

@@ -10,46 +10,48 @@
     </head>
     <body>
         <h1 class="title">To Do Prototype</h1>
-        <div class="container-fluid" id="accordionExample">
-            <div class="accordion-item">
-                <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Login
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-                    </svg>
-                </button> <br/><br/>
+        <div class="container-fluid" >
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Login
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </button> <br/><br/>
 
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                    <h1>Log in</h1>
-                    <form action="todo.html" method="post" enctype="text/plain">
-                        <label for="email">Email Address</label> <br/>
-                        <input type="email" placeholder="Enter Email" name="email" id="email" required>
-                        <br/>
-                        <label for="psw">Password</label> <br/>
-                        <input type="password" placeholder="Enter Password" name="psw" required>
-                        <br/><br/>
-                        <button type="Submit" class="btn btn-primary">Login</button> 
-                    </form>
-                </div>
-            </div> <br/>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <h1>Log in</h1>
+                        <form action="todo.html" method="post" enctype="text/plain">
+                            <label for="email">Email Address</label> <br/>
+                            <input type="email" placeholder="Enter Email" name="email" id="email" required>
+                            <br/>
+                            <label for="psw">Password</label> <br/>
+                            <input type="password" placeholder="Enter Password" name="psw" required>
+                            <br/><br/>
+                            <button type="Submit" class="btn btn-primary">Login</button> 
+                        </form>
+                    </div>
+                </div> <br/>
 
-            <div class="accordion-item">
-                <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Register
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-                    </svg>
-                </button> <br/><br/>
-            
-                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                    <h1>Sign up</h1>
-                    <form action="todo.html" method="post" enctype="text/plain">
-                        <label for="email">Email Address</label> <br/>
-                        <input type="email" placeholder="Enter Email" name="email" id="email" required> <br/>
-                        <label for="psw">Password</label> <br/>
-                        <input type="password" placeholder="Enter Password" name="psw" required> <br/>
-                        <label for="auth">Authentication</label> <br/>
-                        <input type="auth" placeholder="Authentication" name="auth" id="auth" required> <br/><br/>
-                        <button type="Submit" class="btn btn-primary">Signup</button>
-                    </form>
+                <div class="accordion-item">
+                    <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Register
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </button> <br/><br/>
+                
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                        <h1>Sign up</h1>
+                        <form action="todo.html" method="post" enctype="text/plain">
+                            <label for="email">Email Address</label> <br/>
+                            <input type="email" placeholder="Enter Email" name="email" id="email" required> <br/>
+                            <label for="psw">Password</label> <br/>
+                            <input type="password" placeholder="Enter Password" name="psw" required> <br/>
+                            <label for="auth">Authentication</label> <br/>
+                            <input type="auth" placeholder="Authentication" name="auth" id="auth" required> <br/><br/>
+                            <button type="Submit" class="btn btn-primary">Signup</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

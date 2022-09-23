@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 
 .container-fluid {
+    padding-top: 15px;
+    padding-bottom: 15px;
     background-color: aliceblue;
     width: 20%;
     text-align: center;

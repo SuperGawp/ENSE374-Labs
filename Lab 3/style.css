@@ -48,3 +48,7 @@
 .btn {
     padding: .5rem 1rem;
 }
+
+.accordion-button:focus{
+    box-shadow:none;
+}

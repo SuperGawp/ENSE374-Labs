@@ -11,7 +11,7 @@ function addItem()
 function list()
 {
     document.getElementById("lists").innerHTML = "";
-    if(input.length != 0)
+    if(listArray.length != 0)
     {
         for(i = 0; i < listArray.length; i++)
         {

@@ -11,8 +11,8 @@ function addItem()
 function list()
 {
     document.getElementById("lists").innerHTML = "";
-    if(listArray.length != 0)
-    {
+    //if(listArray.length != 0)
+    //{
         for(i = 0; i < listArray.length; i++)
         {
             div = document.createElement("div");
@@ -27,10 +27,10 @@ function list()
             div.appendChild(ans);
             document.getElementById("lists").appendChild(div);
         }
-    }
+    //}
 }
 
-function sort()
+function sortList()
 {
-    
+    listArray.sort();
 }

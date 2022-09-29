@@ -2,7 +2,7 @@ function addItem()
 {
     var input = document.getElementById("listText");
 
-    if(input.value != null)
+    if(input != null)
     {
         div = document.createElement("div");
         div.className = "input-group mb-3";

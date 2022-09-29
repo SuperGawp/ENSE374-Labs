@@ -1,7 +1,7 @@
 function addItem()
 {
     listText = document.getElementById('listText').value;
-    document.getElementById("lists").innerHTML = "";
+    
     div = document.createElement("div");
     div.className = "input-group mb-3";
         
@@ -10,7 +10,7 @@ function addItem()
     list.className = "form-control";
 
     document.getElementById("div").appendChild(list);
-
+    document.getElementById("lists").innerHTML = "";
     document.getElementById("lists").appendChild(div);
 }
 

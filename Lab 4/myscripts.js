@@ -19,6 +19,7 @@ function list()
         ans = document.createElement("input");
         ans.Type = "text";
         ans.className = "form-control";
+        ans.placeholder = listArray[i];
 
         div.appendChild(ans);
         document.getElementById("lists").appendChild(div);

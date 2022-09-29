@@ -1,12 +1,23 @@
 function addItem()
 {
-    if(document.getElementById("add") != null)
-    {
-        var li = document.createElement("li");  
-        var input = document.getElementById("listText");
-        li.innerHTML = input.value;
-        input.value = "";
+    var input = document.getElementById("listText");
 
-        document.getElementById("list").appendChild(li);
+    if(input.value != null)
+    {
+        div = document.createElement("div");
+        div.className = "input-group mb-3";
+         
+        list = document.createElement("input");
+        list.Type = "text";
+        list.className = "form-control";
+        
+        document.getElementById("listText").value = "";
+
+        document.getElementById("lists").appendChild(div);
     }
+}
+
+function sort()
+{
+    
 }

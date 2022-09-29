@@ -33,4 +33,5 @@ function list()
 function sortList()
 {
     listArray.sort();
+    list();
 }

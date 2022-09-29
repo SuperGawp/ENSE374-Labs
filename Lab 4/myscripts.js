@@ -1,6 +1,7 @@
+var listArray = [];
+
 function addItem()
 {
-    var listArray = [];
     input = document.getElementById("listText").value;
     listArray.push(input);
     document.getElementById("listText").value = "";

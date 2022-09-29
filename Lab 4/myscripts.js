@@ -2,8 +2,8 @@ function addItem()
 {
     var listArray = [];
     input = document.getElementById("listText").value;
-    listArray.push(listText);
-    document.getElementById("input").value = "";
+    listArray.push(input);
+    document.getElementById("listText").value = "";
     list();
 }
 

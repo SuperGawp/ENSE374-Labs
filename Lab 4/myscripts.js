@@ -19,7 +19,7 @@ function list()
         ans = document.createElement("input");
         ans.Type = "text";
         ans.className = "form-control";
-        ans.placeholder = listArray[i];
+        //ans.placeholder = listArray[i];
         ans.setAttribute("disabled", listArray[i]);
 
         div.appendChild(ans);

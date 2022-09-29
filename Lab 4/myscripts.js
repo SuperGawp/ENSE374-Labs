@@ -1,6 +1,6 @@
 function addItem()
 {
-    var input = document.getElementById("listText").value;
+    var input = document.getElementById("listText") = "";
 
     div = document.createElement("div");
     div.className = "input-group mb-3";

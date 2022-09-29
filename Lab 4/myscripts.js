@@ -1,17 +1,26 @@
 function addItem()
 {
-    listText = document.getElementById('listText').value;
-    
-    div = document.createElement("div");
-    div.className = "input-group mb-3";
-        
-    list = document.createElement("input");
-    list.Type = "text";
-    list.className = "form-control";
+    input = document.getElementById("listText").value;
+    listArray.push(listText);
+    document.getElementById("input").value = "";
+    list();
+}
 
-    document.getElementById("div").appendChild(list);
+function list()
+{
     document.getElementById("lists").innerHTML = "";
-    document.getElementById("lists").appendChild(div);
+    for(i = 0; i < listArray.length; i++)
+    {
+        div = document.createElement("div");
+        div.className = "input-group mb-3";
+            
+        ans = document.createElement("input");
+        ans.Type = "text";
+        ans.className = "form-control";
+
+        div.appendChild(ans);
+        document.getElementById("lists").appendChild(div);
+    }
 }
 
 function sort()

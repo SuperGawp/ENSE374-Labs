@@ -17,6 +17,8 @@ function addItem()
     
     document.getElementById("listText").value = "";
 
+    document.getElementById("div").appendChild(list);
+
     document.getElementById("lists").appendChild(div);
 }
 

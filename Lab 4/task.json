@@ -1,1 +1,3 @@
-const myJSON = '{"taskID":"2", "taskCreator":Willow, "taskClaimer":John, "taskState":claimed}'
+myJSON = '{"taskID":"2", "taskCreator":Willow, "taskClaimer":John, "taskState":claimed}'
+myJSON = '{"taskID":"3", "taskCreator":Aryan, "taskClaimer":Wall-E, "taskState":unifinished}'
+myJSON = '{"taskID":"4", "taskCreator":Wall-E, "taskClaimer":Maple, "taskState":finished}'

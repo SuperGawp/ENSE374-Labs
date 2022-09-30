@@ -16,6 +16,7 @@ function newDiv()
     
         div.appendChild(ans);
         document.getElementById("lists").appendChild(div);
+        document.getElementById("listText").value = "";
     }
 }
 

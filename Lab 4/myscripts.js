@@ -30,5 +30,5 @@ function addItem()
 function sortList()
 {
     listArray.sort();
-    list();
+    newDiv();
 }

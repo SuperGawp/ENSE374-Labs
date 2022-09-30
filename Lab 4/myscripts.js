@@ -1,5 +1,5 @@
 function addItem() {
-    div = document.createElement('div');
+    const div = document.createElement('div');
     div.className = "input-group mb-3";
     
     ans = document.createElement("input");
@@ -7,5 +7,6 @@ function addItem() {
     ans.className = "form-control";
 
     var inputVal = document.getElementById("listText").value;
-    document.getElementById("listText").appendChild(inputVal);
+    div.appendChild(inputVal);
+    document.getElementById("lists").appendChild(div);
   }

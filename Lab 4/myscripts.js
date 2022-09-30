@@ -25,3 +25,9 @@ function addItem()
     listArray.push(inputVal);
     newDiv();
 }
+
+function sortList()
+{
+    listArray.sort();
+    list();
+}

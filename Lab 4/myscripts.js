@@ -12,6 +12,7 @@ function newDiv()
         ans.Type = "text";
         ans.className = "form-control";
         ans.placeholder = inputVal;
+        ans.setAttribute("disabled",inputVal);
     
         div.appendChild(ans);
         document.getElementById("lists").appendChild(div);

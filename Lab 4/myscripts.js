@@ -2,10 +2,9 @@ var listArray = [];
 
 function newDiv() 
 {
+    document.getElementById("lists").innerHTML = "";
     for(i = 0; i < listArray.length; i++)
     {
-        document.getElementById("lists").innerHTML = "";
-    
         var div = document.createElement('div');
         div.className = "input-group mb-3";
         

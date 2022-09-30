@@ -3,7 +3,7 @@ var listArray = [];
 function addItem() 
 {
     inputVal = document.getElementById("listText").value; 
-    listArray.push(input);
+    listArray.push(inputVal);
 
     for(i = 0; i < listArray.length; i++)
     {

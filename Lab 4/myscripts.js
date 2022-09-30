@@ -1,4 +1,7 @@
-function addItem() {
+function addItem() 
+{
+    document.getElementById("lists").innerHTML = "";
+
     var div = document.createElement('div');
     div.className = "input-group mb-3";
     

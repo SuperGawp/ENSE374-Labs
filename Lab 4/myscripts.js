@@ -1,10 +1,7 @@
 var listArray = [];
 
-function addItem() 
+function newDiv() 
 {
-    inputVal = document.getElementById("listText").value; 
-    listArray.push(inputVal);
-
     for(i = 0; i < listArray.length; i++)
     {
         document.getElementById("lists").innerHTML = "";
@@ -20,4 +17,11 @@ function addItem()
         div.appendChild(ans);
         document.getElementById("lists").appendChild(div);
     }
-  }
+}
+
+function addItem()
+{
+    inputVal = document.getElementById("listText").value; 
+    listArray.push(inputVal);
+    newDiv();
+}

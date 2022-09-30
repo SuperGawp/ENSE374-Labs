@@ -6,7 +6,7 @@ function addItem() {
     ans.Type = "text";
     ans.className = "form-control";
 
-    var inputVal = document.getElementById("listText").innerHTML;
+    inputVal = document.getElementById("listText").value = ""; 
     div.appendChild(inputVal);
     document.getElementById("lists").appendChild(div);
   }

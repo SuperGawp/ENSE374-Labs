@@ -1,5 +1,5 @@
 function addItem() {
-    const div = document.createElement('div');
+    var div = document.createElement('div');
     div.className = "input-group mb-3";
     
     ans = document.createElement("input");

@@ -1,7 +1,7 @@
 function addItem() 
 {
     document.getElementById("lists").innerHTML = "";
-    inputVal = document.getElementById("listText").value = ""; 
+    inputVal = document.getElementById("listText").value; 
 
     var div = document.createElement('div');
     div.className = "input-group mb-3";

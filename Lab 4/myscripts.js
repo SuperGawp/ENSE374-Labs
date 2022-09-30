@@ -1,16 +1,23 @@
+var listArray = [];
+
 function addItem() 
 {
-    document.getElementById("lists").innerHTML = "";
     inputVal = document.getElementById("listText").value; 
+    listArray.push(input);
 
-    var div = document.createElement('div');
-    div.className = "input-group mb-3";
+    for(i = 0; i < listArray.length; i++)
+    {
+        document.getElementById("lists").innerHTML = "";
     
-    ans = document.createElement("input");
-    ans.Type = "text";
-    ans.className = "form-control";
-    ans.placeholder = inputVal;
-
-    div.appendChild(ans);
-    document.getElementById("lists").appendChild(div);
+        var div = document.createElement('div');
+        div.className = "input-group mb-3";
+        
+        ans = document.createElement("input");
+        ans.Type = "text";
+        ans.className = "form-control";
+        ans.placeholder = inputVal;
+    
+        div.appendChild(ans);
+        document.getElementById("lists").appendChild(div);
+    }
   }

@@ -11,7 +11,7 @@ function newDiv()
         ans = document.createElement("input");
         ans.Type = "text";
         ans.className = "form-control";
-        ans.placeholder = inputVal;
+        ans.placeholder = listArray[i];
         ans.setAttribute("disabled",inputVal);
     
         div.appendChild(ans);

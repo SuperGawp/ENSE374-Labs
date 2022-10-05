@@ -1,3 +1,23 @@
-myJSON = '{"taskID":"2", "taskCreator":Willow, "taskClaimer":John, "taskState":claimed}'
-myJSON = '{"taskID":"3", "taskCreator":Aryan, "taskClaimer":Wall-E, "taskState":unifinished}'
-myJSON = '{"taskID":"4", "taskCreator":Wall-E, "taskClaimer":Maple, "taskState":finished}'
+[
+    {
+        "numerical identifier": "1",
+        "task creator": "Willow",
+        "task claimer": "Aryan",
+        "task text": "cleaning",
+        "task state": "claimed"
+    },
+    {
+        "numerical identifier": "2",
+        "task creator": "Wall-E",
+        "task claimer": "Maple",
+        "task text": "being annoying",
+        "task state": "finished"
+    },
+    {
+        "numerical identifier": "3",
+        "task creator": "Aryan",
+        "task claimer": "Sonny",
+        "task text": "being bad at game",
+        "task state": "unfinished"
+    }
+]

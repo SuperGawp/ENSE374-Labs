@@ -27,7 +27,8 @@ function newDiv()
         checkBox.className = "form-check-input mt-0";
 
         checkDiv.appendChild(checkBox);
-    
+        
+        div.appendChild(checkDiv);
         div.appendChild(ans);
         div.appendChild(button);
         

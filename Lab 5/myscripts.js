@@ -13,25 +13,8 @@ function newDiv()
         ans.className = "form-control";
         ans.placeholder = listArray[i];
         ans.setAttribute("disabled",inputVal);
-
-        button = document.createElement("button");
-        button.Type = "button";
-        button.className = "btn btn-outline-secondary";
-        button.innerHTML = "Claim";
-
-        checkDiv = document.createElement("div");
-        checkDiv.className = "input-group-text";
-
-        checkBox = document.createElement("input");
-        checkBox.className = "form-check-input mt-0";
-        checkBox.Type = "checkbox";
-
-        checkDiv.appendChild(checkBox);
-        
-        div.appendChild(checkDiv);
+    
         div.appendChild(ans);
-        div.appendChild(button);
-        
         document.getElementById("lists").appendChild(div);
         document.getElementById("listText").value = "";
     }

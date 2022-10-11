@@ -30,7 +30,6 @@ function newDiv()
     
         div.appendChild(ans);
         div.appendChild(button);
-        div.appendChild(checkDiv);
         
         document.getElementById("lists").appendChild(div);
         document.getElementById("listText").value = "";

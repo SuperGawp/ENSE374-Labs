@@ -23,8 +23,8 @@ function newDiv()
         checkDiv.className = "input-group-text";
 
         checkBox = document.createElement("input");
-        checkBox.Type = "checkbox";
         checkBox.className = "form-check-input mt-0";
+        checkBox.Type = "checkbox";
 
         checkDiv.appendChild(checkBox);
         

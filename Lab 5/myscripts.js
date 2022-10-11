@@ -2,24 +2,21 @@ var listArray = [];
 
 function newDiv() 
 {
-    if(document.getElementById("listText").value != "")
+    document.getElementById("lists").innerHTML = "";
+    for(i = 0; i < listArray.length; i++)
     {
-        document.getElementById("lists").innerHTML = "";
-        for(i = 0; i < listArray.length; i++)
-        {
-            var div = document.createElement('div');
-            div.className = "input-group mb-3";
-            
-            ans = document.createElement("input");
-            ans.Type = "text";
-            ans.className = "form-control";
-            ans.placeholder = listArray[i];
-            ans.setAttribute("disabled",inputVal);
+        var div = document.createElement('div');
+        div.className = "input-group mb-3";
         
-            div.appendChild(ans);
-            document.getElementById("lists").appendChild(div);
-            document.getElementById("listText").value = "";
-        }
+        ans = document.createElement("input");
+        ans.Type = "text";
+        ans.className = "form-control";
+        ans.placeholder = listArray[i];
+        ans.setAttribute("disabled",inputVal);
+    
+        div.appendChild(ans);
+        document.getElementById("lists").appendChild(div);
+        document.getElementById("listText").value = "";
     }
 }
 

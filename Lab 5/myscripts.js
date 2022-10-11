@@ -17,6 +17,7 @@ function newDiv()
         button = document.createElement("button");
         button.Type = "button";
         button.className = "btn btn-outline-secondary";
+        button.innerHTML = "Claim";
     
         div.appendChild(ans);
         div.appendChild(button);

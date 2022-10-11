@@ -18,9 +18,20 @@ function newDiv()
         button.Type = "button";
         button.className = "btn btn-outline-secondary";
         button.innerHTML = "Claim";
+
+        checkDiv = document.createElement("div");
+        checkDiv.className = "input-group-text";
+
+        checkBox = document.createElement("input");
+        checkBox.Type = "checkbox";
+        checkBox.className = "form-check-input mt-0";
+
+        checkDiv.appendChild(checkbox);
     
         div.appendChild(ans);
         div.appendChild(button);
+        div.appendChild(checkDiv);
+        
         document.getElementById("lists").appendChild(div);
         document.getElementById("listText").value = "";
     }

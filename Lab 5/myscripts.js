@@ -32,3 +32,7 @@ function sortList()
     listArray.sort();
     newDiv();
 }
+
+$(document).ready( () => { 
+    //...
+});

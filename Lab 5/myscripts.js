@@ -11,7 +11,7 @@ function newTask()
       $( "#lists" ).append(
         `<div class="input-group mb-3">
             <input type="text" disabled class="form-control" placeholder="`+ list[1] + `" aria-label="Text input with checkbox">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="claimTask('` + list[0] + `')">Claim</button>
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="claim('` + list[0] + `')">Claim</button>
         </div>` );
       }
       if (list[2] == 'claimed')
@@ -22,7 +22,7 @@ function newTask()
             <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input" onclick="finishTask('` + list[0] + `')">
             </div>
             <input type="text" disabled class="form-control" placeholder="`+ list[1] + `" aria-label="Text input with checkbox">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="abandonTask('` + list[0] + `')">Abandon</button>
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="abandon('` + list[0] + `')">Abandon</button>
         </div>` );
       }
       if (list[2] == 'finished')
@@ -30,7 +30,7 @@ function newTask()
       $( "#lists" ).append(
         `<div class="input-group mb-3">
             <div class="input-group-text">
-            <input class="form-check-input mt-0" checked checkbox type="checkbox" value="" aria-label="Checkbox for following text input" onclick="unfinishTask('` + list[0] + `')">
+            <input class="form-check-input mt-0" checked checkbox type="checkbox" value="" aria-label="Checkbox for following text input" onclick="unfinished('` + list[0] + `')">
             </div>
             <input type="text" disabled class="form-control underline" placeholder="`+ list[1] + `" aria-label="Text input with checkbox">
         </div>` );

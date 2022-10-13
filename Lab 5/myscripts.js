@@ -4,7 +4,7 @@ var listID = 0;
 function newTask()
 {
     $( "#lists" ).empty();
-    taskList.forEach(function (list)
+    listArray.forEach(function (list)
     {
       if (list[2] == 'unclaimed')
       {

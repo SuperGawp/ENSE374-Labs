@@ -56,3 +56,7 @@
 .card-header{
     background-color: aliceblue;
 }
+
+.underline {
+    text-decoration: line-through;
+}

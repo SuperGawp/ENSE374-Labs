@@ -19,7 +19,7 @@ function newTask()
       $( "#lists" ).append(
         `<div class="input-group mb-3">
             <div class="input-group-text">
-            <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input" onclick="finishTask('` + list[0] + `')">
+            <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input" onclick="finish('` + list[0] + `')">
             </div>
             <input type="text" disabled class="form-control" placeholder="`+ list[1] + `" aria-label="Text input with checkbox">
             <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="abandon('` + list[0] + `')">Abandon</button>

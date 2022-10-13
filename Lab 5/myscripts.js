@@ -43,8 +43,8 @@ function addItem()
   list = $( "#listText" ).val();
   if (list.length > 0)
   {
-    taskList.push([taskID, list, 'unclaimed']);
-    taskID = taskID + 1;
+    listArray.push([listID, list, 'unclaimed']);
+    listID = listID + 1;
     $( "#listText" ).val(null);
     newTask();
   }
@@ -52,7 +52,7 @@ function addItem()
 
 function claim(ID)
 {
-  taskList.forEach(function (list)
+  listArray.forEach(function (list)
   {
     if (list[0] == ID)
     {
@@ -64,7 +64,7 @@ function claim(ID)
 
 function abandon(ID)
 {
-  taskList.forEach(function (list)
+  listArray.forEach(function (list)
   {
     if (list[0] == ID)
     {
@@ -76,7 +76,7 @@ function abandon(ID)
 
 function finish(ID)
 {
-  taskList.forEach(function (list)
+  listArray.forEach(function (list)
   {
     if (list[0] == ID)
     {
@@ -88,7 +88,7 @@ function finish(ID)
 
 function unfinished(ID)
 {
-  taskList.forEach(function (list)
+  listArray.forEach(function (list)
   {
     if (list[0] == ID)
     {
@@ -100,14 +100,14 @@ function unfinished(ID)
 
 function remove()
 {
-  taskList.forEach(function (list)
+  listArray.forEach(function (list)
   {
     if (list[2] == 'finished')
     {
-      var index = taskList.indexOf(list);
-      if (index !== -1)
+      var temp = listArray.indexOf(list);
+      if (temp !== -1)
       {
-        taskList.splice(index, 1);
+        listArray.splice(temp, 1);
       }
     }
   })

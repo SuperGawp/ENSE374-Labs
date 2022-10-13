@@ -1,7 +1,7 @@
 var listArray = [];
 var listID = 0;
 
-function buildList()
+function newTask()
 {
     $( "#lists" ).empty();
     taskList.forEach(function (list)
@@ -38,19 +38,19 @@ function buildList()
     })
 }
 
-function addTask()
+function addItem()
 {
-  list = $( "#list" ).val();
+  list = $( "#listText" ).val();
   if (list.length > 0)
   {
     taskList.push([taskID, list, 'unclaimed']);
     taskID = taskID + 1;
-    $( "#list" ).val(null);
-    buildList();
+    $( "#listText" ).val(null);
+    newTask();
   }
 }
 
-function claimTask(ID)
+function claim(ID)
 {
   taskList.forEach(function (list)
   {
@@ -59,10 +59,10 @@ function claimTask(ID)
       list[2] = 'claimed';
     }
   })
-  buildList();
+  newTask();
 }
 
-function abandonTask(ID)
+function abandon(ID)
 {
   taskList.forEach(function (list)
   {
@@ -71,10 +71,10 @@ function abandonTask(ID)
       list[2] = 'unclaimed';
     }
   })
-  buildList();
+  newTask();
 }
 
-function finishTask(ID)
+function finish(ID)
 {
   taskList.forEach(function (list)
   {
@@ -83,10 +83,10 @@ function finishTask(ID)
       list[2] = 'finished';
     }
   })
-  buildList();
+  newTask();
 }
 
-function unfinishTask(ID)
+function unfinished(ID)
 {
   taskList.forEach(function (list)
   {
@@ -95,10 +95,10 @@ function unfinishTask(ID)
       list[2] = 'claimed';
     }
   })
-  buildList();
+  newTask();
 }
 
-function removeComplete()
+function remove()
 {
   taskList.forEach(function (list)
   {
@@ -111,5 +111,5 @@ function removeComplete()
       }
     }
   })
-  buildList();
+  newTask();
 }

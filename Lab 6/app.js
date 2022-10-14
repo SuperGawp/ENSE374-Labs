@@ -14,6 +14,11 @@ fs.readFile ( __dirname + "/object.json",
     }
 });
 
+const calculate = require(__dirname + "/calc.js");
+const add = calculate.add;
+
+console.log(add(3,5));
+
 let s = "hello world"
 
 console.log(s)

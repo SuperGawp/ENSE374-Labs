@@ -34,10 +34,11 @@ app.listen (port, () => {
     console.log (`Server is running on http://localhost:${port}`);
 });
 
-app.get("/", (req, res) => {
-    res.send("<h1> Hello Node World! </h1>");
-    console.log("A user requested the root route");
+app.get("/about", (req, res) => {
+    res.send("<h1> I am a SSE student at U of R! </h1>");
+    console.log("A user requested the about page");
 });
+
 
 
 let s = "hello world"

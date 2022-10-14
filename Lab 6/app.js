@@ -34,6 +34,12 @@ app.listen (port, () => {
     console.log (`Server is running on http://localhost:${port}`);
 });
 
+app.get("/", (req, res) => {
+    res.send("<h1> Hello Node World! </h1>");
+    console.log("A user requested the root route");
+});
+
+
 let s = "hello world"
 
 console.log(s)

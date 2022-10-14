@@ -1,4 +1,5 @@
 const fs = require( "fs" );
+
 fs.readFile ( __dirname + "/object.json",
             "utf8", 
             ( err, jsonString ) => {
@@ -18,6 +19,20 @@ const calculate = require(__dirname + "/calc.js");
 const add = calculate.add;
 
 console.log(add(3,5));
+
+const express = require ( "express" );
+
+// this is a canonical alias to make your life easier, like jQuery to $.
+const app = express(); 
+
+// a common localhost test port
+const port = 3000; 
+
+// Simple server operation
+app.listen (port, () => {
+    // template literal
+    console.log (`Server is running on http://localhost:${port}`);
+});
 
 let s = "hello world"
 

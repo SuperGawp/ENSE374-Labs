@@ -26,6 +26,10 @@ const express = require ( "express" );
 // this is a canonical alias to make your life easier, like jQuery to $.
 const app = express(); 
 
+//here is where statis files are stores
+app.use(express.static("public"))
+app.use(express.urlencoded({ extended: true})); 
+
 // a common localhost test port
 const port = 3000; 
 
@@ -39,6 +43,11 @@ app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html")
 });
 
+//lab exercise work
+/*app.post("/", (req, res) => {
+    res.send("<h1>message received: "+ req.body["my-text-entry"]+"</h1>");
+  });
+  
 app.get("/about", (req, res) => {
     res.send("<h1> I am a SSE student at U of R! </h1>");
     console.log("A user requested the about page");
@@ -47,5 +56,4 @@ app.get("/about", (req, res) => {
 app.get("/games", (req, res) => {
     res.send("<h1>I am currently playing Midwatch 2</h1>");
     console.log("A user requested the about page");
-});
-
+});*/

@@ -43,7 +43,7 @@ app.post("/login", (req, res) => {
         console.log("InputEmail: " + InputEmail);
         console.log("InputPassword: " + InputPassword);
         console.log("TrueEmail: " + users.email);
-        console.log("TrueEmail: " + users.password);
+        console.log("TruePassword: " + users.password);
         if(InputEmail == users.email && InputPassword == users.password)
         {
             console.log("SUCCESS");

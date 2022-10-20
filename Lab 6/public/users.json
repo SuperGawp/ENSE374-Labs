@@ -1,19 +1,5 @@
 {
-    "users": 
-    [
-        {
-            "email": "acl409@email.com",
-            "password": "acl409"
-            
-        },
-        {
-            "email": "willow@email.com",
-            "password": "willow!"
-        },
-        {
-            "email": "maple@email.com",
-            "password": "wall-e"
-        }
-    ]
+    "email": "willow@email.com",
+    "password": "willow!"
 }
   

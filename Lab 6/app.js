@@ -43,6 +43,42 @@ app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html")
 });
 
+const fs = require( "fs" );
+
+fs.readFile ( __dirname + "/public/login.json",
+            "utf8", 
+            ( err, jsonString ) => {
+    if ( err ) {
+        console.log("Error reading file from disk:", err);
+        return;
+    }
+    try {
+        const login = JSON.parse(jsonString);
+        console.log("Username is:", login.username); //
+        console.log(login); // entire login.json
+    } catch ( err ) {
+        console.log("Error parsing JSON:", err);
+    }
+});
+
+app.post('/', function (req, res) {
+
+    User.findOne({
+        username: req.body.log_username,
+        password: req.body.log_password
+    }, function (err, docs) {
+        if (docs.length !== 0) {
+            console.log("user exists");
+            res.redirect('/todo.html'); // main page url
+        }
+        else {
+            console.log("no exist");
+            res.redirect('/index.html');
+        }
+    });
+
+});
+
 //lab exercise work
 /*app.post("/", (req, res) => {
     res.send("<h1>message received: "+ req.body["my-text-entry"]+"</h1>");

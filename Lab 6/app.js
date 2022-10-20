@@ -79,6 +79,52 @@ app.post('/', function (req, res) {
 
 });
 
+const users = [
+    // This user is added to the array to avoid creating a new user on each restart
+    {
+        email: 'acl409@email.com',
+        // This is the SHA256 hash for value of `password`
+        password: 'acl409'
+    }
+];
+
+app.post('/todo', (req, res) => {
+    const { email, password, confirmPassword } = req.body;
+
+    // Check if the password and confirm password fields match
+    if (password === confirmPassword) {
+
+        // Check if user with the same email is also registered
+        if (users.find(user => user.email === email)) {
+
+            res.render('register', {
+                message: 'User already registered.',
+                messageClass: 'alert-danger'
+            });
+
+            return;
+        }
+
+        const hashedPassword = getHashedPassword(password);
+
+        // Store user into the database if you are using one
+        users.push({
+            email,
+            password: hashedPassword
+        });
+
+        res.render('login', {
+            message: 'Registration Complete. Please login to continue.',
+            messageClass: 'alert-success'
+        });
+    } else {
+        res.render('register', {
+            message: 'Password does not match.',
+            messageClass: 'alert-danger'
+        });
+    }
+});
+
 //lab exercise work
 /*app.post("/", (req, res) => {
     res.send("<h1>message received: "+ req.body["my-text-entry"]+"</h1>");

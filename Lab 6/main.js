@@ -42,7 +42,7 @@ app.post("/login", (req, res) => {
         if(InputEmail == users.email && InputPassword == users.password)
         {
             console.log("SUCCESS");
-            res.redirect("/ToDo.html");
+            res.redirect("/todo.html");
         }
         else
         {

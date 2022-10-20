@@ -20,49 +20,38 @@ app.get("/", (req, res) => {
 app.use(express.static("public"))
 app.use(express.urlencoded({ extended: true})); 
 
-const users = [
-    // This user is added to the array to avoid creating a new user on each restart
+app.post("/login", (req, res) => {
+    var InputEmail = req.body["InputEmail1"];
+    var InputPassword = req.body["InputPassword1"];
+
+    const fs = require( "fs" );
+
+fs.readFile ( __dirname + "/public/users.json",
+            "utf8", 
+            ( err, jsonString ) => {
+    if ( err ) 
     {
-        email: 'acl409@email.com',
-        // This is the SHA256 hash for value of `password`
-        password: 'acl409'
+        console.log("Error reading file from disk:", err);
+        return;
     }
-];
-
-app.post('/login', (req, res) => {
-    const { email, password, confirmPassword } = req.body;
-
-    // Check if the password and confirm password fields match
-    if (password === confirmPassword) {
-
-        // Check if user with the same email is also registered
-        if (users.find(user => user.email === email)) {
-
-            res.render('register', {
-                message: 'User already registered.',
-                messageClass: 'alert-danger'
-            });
-
-            return;
+    try {
+        const object = JSON.parse(jsonString);
+        console.log("InputEmail: " + InputEmail);
+        console.log("InputPassword: " + InputPassword);
+        console.log("TrueEmail: " + object.email);
+        console.log("TrueEmail: " + object.password);
+        if(InputEmail == object.email && InputPassword == object.password)
+        {
+            console.log("SUCCESS");
+            res.redirect("/todo.html");
         }
-
-        const hashedPassword = getHashedPassword(password);
-
-        // Store user into the database if you are using one
-        users.push({
-            email,
-            password: hashedPassword
-        });
-
-        res.render('login', {
-            message: 'Registration Complete. Please login to continue.',
-            messageClass: 'alert-success'
-        });
-    } else {
-        res.render('register', {
-            message: 'Password does not match.',
-            messageClass: 'alert-danger'
-        });
+        else
+        {
+            console.log("FAILURE");
+            res.redirect("/");
+        }
+    } catch ( err ) {
+        console.log("Error parsing JSON:", err);
     }
+    });
 });
-

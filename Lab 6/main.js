@@ -1,25 +1,3 @@
-const fs = require( "fs" );
-
-fs.readFile ( __dirname + "/public/users.json",
-            "utf8", 
-            ( err, jsonString ) => {
-    if ( err ) 
-    {
-        console.log("Error reading file from disk:", err);
-        return;
-    }
-    try 
-    {
-        const users = JSON.parse(jsonString);
-        console.log("Username is:", users.username); //
-        console.log(users); // entire users.json
-    } 
-    catch ( err ) 
-    {
-        console.log("Error parsing JSON:", err);
-    }
-});
-
 const express = require ( "express" );
 
 // this is a canonical alias to make your life easier, like jQuery to $.
@@ -46,9 +24,7 @@ app.post("/login", (req, res) => {
     var InputEmail = req.body["InputEmail1"];
     var InputPassword = req.body["InputPassword1"];
 
-    const fs = require( "fs" );
-
-fs.readFile ( __dirname + "/public/users.json",
+    fs.readFile ( __dirname + "/public/users.json",
             "utf8", 
             ( err, jsonString ) => {
     if ( err ) 
@@ -56,7 +32,9 @@ fs.readFile ( __dirname + "/public/users.json",
         console.log("Error reading file from disk:", err);
         return;
     }
-    try {
+    try 
+    {
+        const users = JSON.parse(jsonString);
         console.log("InputEmail: " + InputEmail);
         console.log("InputPassword: " + InputPassword);
         console.log("TrueEmail: " + users.email);
@@ -64,14 +42,16 @@ fs.readFile ( __dirname + "/public/users.json",
         if(InputEmail == users.email && InputPassword == users.password)
         {
             console.log("SUCCESS");
-            res.redirect("/todo.html");
+            res.redirect("/ToDo.html");
         }
         else
         {
             console.log("FAILURE");
             res.redirect("/");
         }
-    } catch ( err ) {
+    }
+    catch ( err ) 
+    {
         console.log("Error parsing JSON:", err);
     }
     });

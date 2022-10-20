@@ -21,8 +21,8 @@ app.use(express.static("public"))
 app.use(express.urlencoded({ extended: true})); 
 
 app.post("/login", (req, res) => {
-    var InputEmail = req.body["InputEmail1"];
-    var InputPassword = req.body["InputPassword1"];
+    var InputEmail = req.body["email1"];
+    var InputPassword = req.body["password1"];
 
     const fs = require( "fs" );
     fs.readFile ( __dirname + "/public/users.json",

@@ -37,7 +37,7 @@ app.post("/login", (req, res) => {
     {
         const users = JSON.parse(jsonString);
 
-        console.log("Username is:", users.username); //
+        console.log("Password is:", users.password); //
         console.log(users); // entire users.json
 
         console.log("InputEmail: " + InputEmail);

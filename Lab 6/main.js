@@ -1,3 +1,25 @@
+const fs = require( "fs" );
+
+fs.readFile ( __dirname + "/public/users.json",
+            "utf8", 
+            ( err, jsonString ) => {
+    if ( err ) 
+    {
+        console.log("Error reading file from disk:", err);
+        return;
+    }
+    try 
+    {
+        const users = JSON.parse(jsonString);
+        console.log("Username is:", users.username); //
+        console.log(users); // entire users.json
+    } 
+    catch ( err ) 
+    {
+        console.log("Error parsing JSON:", err);
+    }
+});
+
 const express = require ( "express" );
 
 // this is a canonical alias to make your life easier, like jQuery to $.
@@ -35,12 +57,11 @@ fs.readFile ( __dirname + "/public/users.json",
         return;
     }
     try {
-        const object = JSON.parse(jsonString);
         console.log("InputEmail: " + InputEmail);
         console.log("InputPassword: " + InputPassword);
-        console.log("TrueEmail: " + object.email);
-        console.log("TrueEmail: " + object.password);
-        if(InputEmail == object.email && InputPassword == object.password)
+        console.log("TrueEmail: " + users.email);
+        console.log("TrueEmail: " + users.password);
+        if(InputEmail == users.email && InputPassword == users.password)
         {
             console.log("SUCCESS");
             res.redirect("/todo.html");

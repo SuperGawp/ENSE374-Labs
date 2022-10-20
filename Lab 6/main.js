@@ -21,8 +21,8 @@ app.use(express.static("public"))
 app.use(express.urlencoded({ extended: true})); 
 
 app.post("/login", (req, res) => {
-    var InputEmail = req.body["InputEmail1"];
-    var InputPassword = req.body["InputPassword1"];
+    var InputEmail = req.body["email1"];
+    var InputPassword = req.body["psw1"];
 
     const fs = require( "fs" );
     fs.readFile ( __dirname + "/public/users.json",
@@ -41,6 +41,7 @@ app.post("/login", (req, res) => {
         console.log("InputPassword: " + InputPassword);
         console.log("TrueEmail: " + users.email);
         console.log("TruePassword: " + users.password);
+
         if(InputEmail == users.email && InputPassword == users.password)
         {
             console.log("SUCCESS");

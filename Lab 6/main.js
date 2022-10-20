@@ -1,4 +1,5 @@
 const express = require ( "express" );
+var bodyParser = require('body-parser')
 
 // this is a canonical alias to make your life easier, like jQuery to $.
 const app = express();
@@ -19,10 +20,11 @@ app.get("/", (req, res) => {
 //here is where statis files are stores
 app.use(express.static("public"))
 app.use(express.urlencoded({ extended: true})); 
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.post("/login", (req, res) => {
-    var InputEmail = req.body["email1"];
-    var InputPassword = req.body["psw1"];
+    var InputEmail = req.body.email;
+    var InputPassword = req.body.password;
 
     const fs = require( "fs" );
     fs.readFile ( __dirname + "/public/users.json",

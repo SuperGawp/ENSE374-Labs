@@ -24,6 +24,7 @@ app.post("/login", (req, res) => {
     var InputEmail = req.body["InputEmail1"];
     var InputPassword = req.body["InputPassword1"];
 
+    const fs = require( "fs" );
     fs.readFile ( __dirname + "/public/users.json",
             "utf8", 
             ( err, jsonString ) => {

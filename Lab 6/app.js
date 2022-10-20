@@ -45,7 +45,7 @@ app.get("/", (req, res) => {
 
 const fs = require( "fs" );
 
-fs.readFile ( __dirname + "/public/login.json",
+fs.readFile ( __dirname + "/public/users.json",
             "utf8", 
             ( err, jsonString ) => {
     if ( err ) {
@@ -55,7 +55,7 @@ fs.readFile ( __dirname + "/public/login.json",
     try {
         const login = JSON.parse(jsonString);
         console.log("Username is:", login.username); //
-        console.log(login); // entire login.json
+        console.log(login); // entire users.json
     } catch ( err ) {
         console.log("Error parsing JSON:", err);
     }

@@ -12,6 +12,10 @@ app.listen (port, () => {
     console.log (`Server is running on http://localhost:${port}`);
 });
 
+app.get("/", (req, res) => {
+    res.sendFile(__dirname + "/public/login.html")
+});
+
 //here is where statis files are stores
 app.use(express.static("public"))
 app.use(express.urlencoded({ extended: true})); 

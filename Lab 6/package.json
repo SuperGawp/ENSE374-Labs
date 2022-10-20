@@ -2,7 +2,7 @@
   "name": "lab-6",
   "version": "1.0.0",
   "description": "Welcome to My Lab 6 Work!",
-  "main": "app.js",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

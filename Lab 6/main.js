@@ -24,8 +24,8 @@ app.use(express.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 
 app.post("/login", (req, res) => {
-    var loginEmail = req.body[email1];
-    var loginPassword = req.body.psw1;
+    var loginEmail = req.body["email1"];
+    var loginPassword = req.body["psw1"];
 
     const fs = require( "fs" );
     fs.readFile ( __dirname + "/public/users.json",

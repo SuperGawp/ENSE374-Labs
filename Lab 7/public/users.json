@@ -1,8 +1,4 @@
-{
-    "users":
-    [
-        {"user":"user1","password":"password1"},
-        {"user":"user2","password":"password2"},
-        {"user":"user3","password":"password3"}
-    ]
-}
+{"users":[    
+    {"email":"willow@email.com", "password":"willow"}, 
+    {"email":"aryan@email.com", "password":"aryan"}     
+]} 

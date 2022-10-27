@@ -1,5 +1,8 @@
 {
-    "email": "willow@email.com",
-    "password": "willow"
+    "users":
+    [
+        {"user":"user1","password":"password1"},
+        {"user":"user2","password":"password2"},
+        {"user":"user3","password":"password3"}
+    ]
 }
-  

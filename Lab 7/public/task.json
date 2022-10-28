@@ -1,0 +1,7 @@
+[    
+    {"id":1, "text":"Cleaning room", "state":"unclaimed", "creater":"willow", "isTaskClaimed":false, "claimingUser":null, "isTaskDone":false, "isTaskCleared":false},
+    {"id":2, "text":"Being bad at overwatch", "state":"unfinished", "creater":"willow", "isTaskClaimed":true, "claimingUser":"aryan", "isTaskDone":true, "isTaskCleared":false},
+    {"id":1, "text":"Loving the pets", "state":"unfinished", "creater":"aryan", "isTaskClaimed":true, "claimingUser":"willow", "isTaskDone":false, "isTaskCleared":false},
+    {"id":1, "text":"walking the dogs and cat", "state":"finished", "creater":"willow", "isTaskClaimed":true, "claimingUser":"aryan", "isTaskDone":true, "isTaskCleared":true},
+    {"id":1, "text":"Going Dangerfield shopping", "state":"finished", "creater":"aryan", "isTaskClaimed":true, "claimingUser":"willow", "isTaskDone":true, "isTaskCleared":true}
+]

@@ -1,4 +1,10 @@
-{"users":[    
-    {"email":"willow@email.com", "password":"willow"}, 
-    {"email":"aryan@email.com", "password":"aryan"}     
-]} 
+[    
+    {
+        "username":"willow@email.com", 
+        "password":"willow"
+    }, 
+    {
+        "username":"aryan@email.com", 
+        "password":"aryan"
+    }     
+]

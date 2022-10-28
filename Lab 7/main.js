@@ -56,7 +56,11 @@ app.post("/login", (req, res) => {
             if(loginEmail == users[i].username && loginPassword == users[i].password)
             {
                 console.log("SUCCESS");
-                res.redirect("/todo.html");
+                res.redirect("/todo");
+
+                app.get("/todo", function (req, res) {
+                    res.render("todo", {username: loginEmail});
+                });
             }
             else
             {
@@ -120,7 +124,11 @@ app.post("/register", (req, res) => {
         {
             usersLoaded.push({"username": registerEmail, "password": registerPassword});
             getUsers();
-            res.redirect("/todo.html");
+            res.redirect("/todo");
+
+            app.get("/todo", function (req, res) {
+                res.render("todo", {username: registerEmail});
+            });
         }
         isItTrue = 0;
     }

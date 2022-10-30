@@ -10,6 +10,7 @@
     </head>
     <body>
         <h1 class="title">Sort-a Easy Lab Assignment</h1>
+    <% if (username != null) { %>
         <div class="container-fluid">
             <div class="accordion" id="accordionExample">
                 <div class="card">
@@ -25,7 +26,7 @@
                     </div>
                     <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                         <div class="card-body">
-                            <button type="button" class="btn btn-primary" onclick="document.location.href='index.html'">Log out</button>
+                            <button type="button" class="btn btn-primary" onclick="document.location.href='/logout'">Log out</button>
                         </div>
                     </div>
                 </div>
@@ -33,19 +34,50 @@
         </div><br/><br/>
 
         <div class="todoCenter">
-            <div id="lists">
+    
                 <!--lists go here after pressing add-->
-            </div>
+                <% tasks.forEach(function (task) {%>
+                    <% if (task.isTaskCleared == false) { %>
+                        <% if (task.isTaskClaimed == false) {%>
+                            <% if (task.state == 'unclaimed') {%>
+                                <%- include("partials/unclaimed.ejs", {task : task}) -%>
+                            <% } %>   
+                        <% } %> 
+                        
+                        <% if(task.claimingUser == username) {%> 
+                            <% if(task.state == 'unfinished') {%> 
+                                <%- include("partials/unfinished.ejs", {task : task}) -%>
+                            <% } %> 
 
-            <div class="input-group mb-3" id="task">
-                <input type="text" class="form-control" id="listText" placeholder="Add a list element">
-                <button type="button" class="btn btn-outline-secondary" id="add" onclick="addItem()">Add</button>
-            </div>
+                            <% if(task.state == 'finished') {%> 
+                                <%- include("partials/finished.ejs", {task : task}) -%>
+                            <% } %>
+                        <% } %> 
+                        
+                        <% if (task.claimingUser != username && task.isTaskClaimed == true && task.isTaskDone == true) { %>
+                            <%- include("partials/finishedOtheruser.ejs", {task : task}) -%>
+                        <% } %>
+                
+                        <% if (task.claimingUser != username && task.isTaskClaimed == true && task.isTaskDone == false) { %>
+                        <%- include("partials/unfinishedOtheruser.ejs", {task : task}) -%>
+                        <% } %>
+                    <% } %>
+                <% }) %> 
 
-            <button type="button" class="btn btn-outline-secondary" onclick="remove()">Remove Complete</button> <br/>
+            <form action="/addtask" method="post">
+                <div class="input-group mb-3" id="task">
+                    <input type="text" class="form-control" id="listText" name="listText" placeholder="Add a list element">
+                    <input type="hidden" name="username" value="<%= username %>">
+                    <button type="submit" class="btn btn-outline-secondary" id="add">Add</button>
+                </div>
+            </form> 
+
+            <form action="/purge" method="post">
+                <input type="hidden" name="username" value="<%= username %>">
+                <button type="button" class="btn btn-outline-secondary">Remove Complete</button>
+            </form>
         </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <% } %>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-        <script src="./js/myscripts.js"></script>
     </body>
 </html>

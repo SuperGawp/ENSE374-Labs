@@ -1,0 +1,10 @@
+<div class="input-group mb-3">
+    <div class="input-group-text">
+        <form class="row g-1 needs-validation" action="/unfinish" method="post">
+            <input type="hidden" name="taskID" value="<%-task.id%>" >
+            <input type="hidden" name="username" value="<%=username%>" >
+            <input onChange="this.form.submit()" checked class="form-check-input mt-0" checkbox type="checkbox">
+        </form>
+    </div>
+    <input type="text" disabled class="form-control underline" style="text-decoration:line-through" placeholder="<%- task.text %>" aria-label="Text input with checkbox">
+</div>

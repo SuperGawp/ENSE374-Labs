@@ -135,7 +135,7 @@ app.post("/register", (req, res) => {
         {
             usersLoaded.push({"username": registerUser, "password": registerPassword});
             currentUser = registerUser;
-            getUsers();
+            addUsers();
 
             res.redirect("/todo");
         }

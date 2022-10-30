@@ -35,7 +35,7 @@ app.get("/todo", function (req, res) {
 
 //--------------------------------------------------------------------------------
 
-function getUsers()
+function addUsers()
 {
     var fs = require('fs')
     fs.writeFile('./public/users.json', JSON.stringify(usersLoaded), (err) => {
@@ -43,12 +43,12 @@ function getUsers()
     });
 }
 
-function addUsers()
+function getUsers()
 {
     usersLoaded = require('./public/users.json');
 }
 
-function getTasks()
+function addTasks()
 {
     var fs = require('fs')
     fs.writeFile('./public/tasks.json', JSON.stringify(taskLoaded), (err) => {
@@ -56,7 +56,7 @@ function getTasks()
     });
 }
 
-function addTasks()
+function getTasks()
 {
     taskLoaded = require('./public/tasks.json');
 }
@@ -69,8 +69,8 @@ app.get("/logout",(req,res)=>{
 });
 
 app.post("/login", (req, res) => {
-    addTasks();
-    addUsers();
+    getTasks();
+    getUsers();
     loginUser = req.body["user1"];
     var loginPassword = req.body["psw1"];
 
@@ -113,8 +113,8 @@ app.post("/login", (req, res) => {
 });
 
 app.post("/register", (req, res) => {
-    addTasks();
-    addUsers();
+    getTasks();
+    getUsers();
     var isItTrue = 0;
     var registerUser = req.body["user2"];
     var registerPassword = req.body["psw2"];
@@ -148,7 +148,7 @@ app.post("/register", (req, res) => {
 });
 
 app.post("/addtask",(req,res)=>{
-    addTasks();
+    getTasks();
     var taskLength = taskLoaded.length;
     var addTask = req.body["listText"];
 
@@ -156,59 +156,59 @@ app.post("/addtask",(req,res)=>{
     taskLoaded.push({"id": taskLength, "text": addTask, "state": "unclaimed", "creator": currentUser, "isTaskClaimed":false,"claimingUser":null,"isTaskDone":false,"isTaskCleared":false});
     currentUser = req.body.username;
     console.log(currentUser);
-    getTasks();
+    addTasks();
 
     res.redirect("/todo");
 });
 
 app.post("/claim",(req,res)=>{
-    addTasks();
+    getTasks();
     currentUser = req.body["username"];
     var taskID = req.body["taskID"];
     var task = taskLoaded.find(task => task.id == taskID);
     task.claimingUser = currentUser;
     task.isTaskClaimed = false; 
     task.state = "unfinished";
-    getTasks();
+    addTasks();
     res.redirect("/todo");
 });
 
 app.post("/abandon",(req,res)=>{
-    addTasks();
+    getTasks();
     currentUser = req.body["username"];
     var taskID = req.body["taskID"];
     var task = taskLoaded.find(task => task.id == taskID);
     task.claimingUser = null;
     task.isTaskClaimed = false; 
     task.state = "unclaimed";
-    getTasks();
+    addTasks();
     res.redirect("/todo");
 });
 
 app.post("/finish",(req,res)=>{
-    addTasks();
+    getTasks();
     currentUser = req.body["username"];
     var taskID = req.body["taskID"];
     var task = taskLoaded.find(task => task.id == taskID);
     task.isTaskDone = true;
     task.state = "finished";
-    getTasks();
+    addTasks();
     res.redirect("/todo");
 });
 
 app.post("/unfinish",(req,res)=>{
-    addTasks();
+    getTasks();
     currentUser = req.body["username"];
     var taskID = req.body["taskID"];
     var task = taskLoaded.find(task => task.id == taskID);
     task.isTaskDone = false;
     task.state = "unfinished";
-    getTasks();
+    addTasks();
     res.redirect("/todo");
 });
 
 app.post("/purge",(req,res)=>{
-    addTasks();
+    getTasks();
     currentUser = req.body["username"];
     for(var i = 0; i < taskLoaded.length; i++)
     {
@@ -217,6 +217,6 @@ app.post("/purge",(req,res)=>{
             taskLoaded[i].isTaskCleared = true
         }
     }
-    getTasks();
+    addTasks();
     res.redirect("/todo");
 });

@@ -3,11 +3,11 @@ const express = require ( "express" );
 
 const mongoose = require( "mongoose" );
 // connect to mongoose on port 27017
-mongoose.connect( "mongodb://localhost:27017/games", 
+mongoose.connect( "mongodb://localhost:27017/todo", 
                 { useNewUrlParser: true, 
                   useUnifiedTopology: true});
 
-// create a mongoose schema for a game
+// create a mongoose schema for Users
 const userSchema = new mongoose.Schema ({
     username:   String,
     password:   String
@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema ({
 
 const Users = mongoose.model ( "Users", userSchema );
 
-// create a mongoose schema for a game
+// create a mongoose schema for Tasks
 const tasksSchema = new mongoose.Schema ({
     text:   String,
     state:   String,
@@ -51,6 +51,11 @@ app.use(express.static(__dirname + '/public'));
 var loginUser = [];
 var currentUser;
 var taskLoaded = [];
+
+const usersDB = new Users({
+    username: loginUser,
+    password: loginPassword
+});
 
 app.get("/", function (req, res) {
     res.render("login");
@@ -128,8 +133,11 @@ app.post("/login", async(req, res) => {
                 console.log("SUCCESS");
 
                 const usersDB = new Users({
-                    username: req.body.
-                })
+                    username: loginUser,
+                    password: loginPassword
+                });
+
+                usersDB.save();
 
                 res.redirect("/todo");
             }
@@ -168,6 +176,13 @@ app.post("/register", (req, res) => {
             usersLoaded.push({"username": registerUser, "password": registerPassword});
             currentUser = registerUser;
             addUsers();
+
+            const usersDB = new Users({
+                username: loginUser,
+                password: loginPassword
+            });
+
+            usersDB.save();
 
             res.redirect("/todo");
         }

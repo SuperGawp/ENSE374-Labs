@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema ({
     password:   String
 });
 
-const Users = mongoose.model ( "Users", userSchema );
+const Users = mongoose.model ("Users", userSchema);
 
 // create a mongoose schema for Tasks
 const tasksSchema = new mongoose.Schema ({
@@ -21,12 +21,12 @@ const tasksSchema = new mongoose.Schema ({
     state:   String,
     creator:    String,
     isTaskClaimed: Boolean, 
-    claimingUser: Boolean, 
+    claimingUser: String, 
     isTaskDone: Boolean, 
     isTaskCleared: Boolean
 });
 
-const Tasks = mongoose.model ( "Tasks", tasksSchema );
+const Tasks = mongoose.model ("Tasks", tasksSchema);
 
 // this is a canonical alias to make your life easier, like jQuery to $.
 const app = express();
@@ -51,11 +51,6 @@ app.use(express.static(__dirname + '/public'));
 var loginUser = [];
 var currentUser;
 var taskLoaded = [];
-
-const usersDB = new Users({
-    username: loginUser,
-    password: loginPassword
-});
 
 app.get("/", function (req, res) {
     res.render("login");
@@ -139,6 +134,8 @@ app.post("/login", async(req, res) => {
 
                 usersDB.save();
 
+
+
                 res.redirect("/todo");
             }
         }
@@ -178,8 +175,8 @@ app.post("/register", (req, res) => {
             addUsers();
 
             const usersDB = new Users({
-                username: loginUser,
-                password: loginPassword
+                username: registerUser,
+                password: registerPassword
             });
 
             usersDB.save();
@@ -267,3 +264,58 @@ app.post("/purge",(req,res)=>{
     addTasks();
     res.redirect("/todo");
 });
+
+const task1 = new Tasks({
+    text: "Cleaning room",
+    state: "unclaimed",
+    creator: "willow",
+    isTaskClaimed: false,
+    claimingUser: "",
+    isTaskDone: false,
+    isTaskCleared: false,
+});
+task1.save();
+
+const task2 = new Tasks({
+    text: "Being bad at overwatch",
+    state: "unfinished",
+    creator: "willow",
+    isTaskClaimed: true,
+    claimingUser: "willow",
+    isTaskDone: false,
+    isTaskCleared: false,
+});
+task2.save();
+
+const task3 = new Tasks({
+    text: "Loving the pets",
+    state: "unfinished",
+    creator: "willow",
+    isTaskClaimed: true,
+    claimingUser: "aryan",
+    isTaskDone: false,
+    isTaskCleared: false,
+});
+task3.save();
+
+const task4 = new Tasks({
+    text: "walking the dogs and cat",
+    state: "unfinished",
+    creator: "willow",
+    isTaskClaimed: true,
+    claimingUser: "willow",
+    isTaskDone: false,
+    isTaskCleared: false,
+});
+task4.save();
+
+const task5 = new Tasks({
+    text: "Going Dangerfield shopping",
+    state: "finished",
+    creator: "willow",
+    isTaskClaimed: true,
+    claimingUser: "aryan",
+    isTaskDone: true,
+    isTaskCleared: false,
+});
+task5.save();

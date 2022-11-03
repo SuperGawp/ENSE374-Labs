@@ -127,15 +127,6 @@ app.post("/login", async(req, res) => {
                 currentUser = users[i].username;
                 console.log("SUCCESS");
 
-                const usersDB = new Users({
-                    username: loginUser,
-                    password: loginPassword
-                });
-
-                usersDB.save();
-
-
-
                 res.redirect("/todo");
             }
         }

@@ -256,7 +256,7 @@ app.post("/purge",(req,res)=>{
     res.redirect("/todo");
 });
 
-const task1 = new Tasks({
+/*const task1 = new Tasks({
     text: "Cleaning room",
     state: "unclaimed",
     creator: "willow",
@@ -309,4 +309,4 @@ const task5 = new Tasks({
     isTaskDone: true,
     isTaskCleared: false,
 });
-task5.save();
+task5.save();*/

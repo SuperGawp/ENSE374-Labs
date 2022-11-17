@@ -1,3 +1,4 @@
 <div class="input-group mb-3">
-    <input type="text" disabled class="form-control underline" placeholder="<%-task.text%> - Claimed by: <%-task.claimingUser%>" aria-label="Text input with checkbox">
+    <input type="text" name="hiddenID" id="" hidden value="<%= task._id %>">
+    <input type="text" disabled class="form-control underline" id="task" name="task" placeholder="<%-task.text%> - Claimed by: <%-task.claimingUser%>" aria-label="Text input with checkbox">
 </div>

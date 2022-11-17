@@ -1,7 +1,31 @@
-const bodyParser = require('body-parser');
-const express = require ( "express" );
-
+const express  = require( "express" );
 const mongoose = require( "mongoose" );
+
+// 1. Require dependencies /////////////////////////////////////////
+const session = require("express-session")
+const passport = require("passport")
+const passportLocalMongoose = require("passport-local-mongoose")
+require("dotenv").config();
+////////////////////////////////////////////////////////////////////
+
+
+// this is a canonical alias to make your life easier, like jQuery to $.
+const app = express();
+
+// a common localhost test port
+const port = 3000; 
+
+app.use(session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.use (passport.initialize());
+app.use (passport.session());
+
+app.set("view engine", "ejs");
+
 // connect to mongoose on port 27017
 mongoose.connect( "mongodb://localhost:27017/todo", 
                 { useNewUrlParser: true, 
@@ -12,6 +36,9 @@ const userSchema = new mongoose.Schema ({
     username:   String,
     password:   String
 });
+
+// plugins extend Schema functionality
+userSchema.plugin(passportLocalMongoose);
 
 const Users = mongoose.model ("Users", userSchema);
 
@@ -28,20 +55,15 @@ const tasksSchema = new mongoose.Schema ({
 
 const Tasks = mongoose.model ("Tasks", tasksSchema);
 
-// this is a canonical alias to make your life easier, like jQuery to $.
-const app = express();
-
-// a common localhost test port
-const port = 3000; 
+passport.use(Users.createStrategy());
+passport.serializeUser(Users.serializeUser());
+passport.deserializeUser(Users.deserializeUser());
 
 // Simple server operation
 app.listen (port, () => {
     // template literal
     console.log (`Server is running on http://localhost:${port}`);
 });
-
-app.set("view engine", "ejs");
-
 
 app.use(express.urlencoded({ extended: true})); 
 
@@ -56,36 +78,29 @@ app.get("/", function (req, res) {
     res.render("login");
 });
 
-app.get("/todo", function (req, res) {
+/*app.get("/todo", function (req, res) {
     res.render("todo", {username: currentUser, tasks: taskLoaded});
-});
+});*/
 
 //--------------------------------------------------------------------------------
 
-function addUsers()
+function renderPage(req,res)
 {
-    var fs = require('fs')
-    fs.writeFile('./public/users.json', JSON.stringify(usersLoaded), (err) => {
-        if (err) console.log('Error writing file:', err);
+    Tasks.find((err, tasks) => {
+        if (err) 
+        {
+            console.log(err);
+        } 
+        else 
+        {
+            res.render("todo", 
+            {
+                username: currentUser,
+                tasks: tasks,
+            });
+        }
     });
-}
-
-function getUsers()
-{
-    usersLoaded = require('./public/users.json');
-}
-
-function addTasks()
-{
-    var fs = require('fs')
-    fs.writeFile('./public/tasks.json', JSON.stringify(taskLoaded), (err) => {
-        if (err) console.log('Error writing file:', err);
-    });
-}
-
-function getTasks()
-{
-    taskLoaded = require('./public/tasks.json');
+    return;
 }
 
 //--------------------------------------------------------------------------------
@@ -95,166 +110,133 @@ app.get("/logout",(req,res)=>{
     res.redirect("/");
 });
 
-app.post("/login", async(req, res) => {
-    getTasks();
-    getUsers();
-    loginUser = req.body["user1"];
-    var loginPassword = req.body["psw1"];
-
-    const fs = require( "fs" );
-    fs.readFile ( __dirname + "/public/users.json",
-            "utf8", 
-            ( err, jsonString ) => {
-    if ( err ) 
-    {
-        console.log("Error reading file from disk:", err);
-        return;
-    }
-    try 
-    {
-        const users = JSON.parse(jsonString);
-
-        console.log(users); // entire users.json
-
-        for(var i = 0; i < usersLoaded.length; i++)
-        {
-            console.log("loginUser: " + loginUser);
-            console.log("loginPassword: " + loginPassword);
-            console.log("TrueEmail: " + users[i].username);
-            console.log("TruePassword: " + users[i].password);
-            if(loginUser == users[i].username && loginPassword == users[i].password)
-            {   
-                currentUser = users[i].username;
-                console.log("SUCCESS");
-
-                res.redirect("/todo");
-            }
+app.post( "/login", ( req, res ) => {
+    currentUser = req.body.username;
+    console.log(req.body.password);
+    console.log( "User " + req.body.username + " is attempting to log in" );
+    const user = new Users ({
+        username: req.body.username,
+        password: req.body.password
+    });
+    req.login ( user, ( err ) => {
+        if ( err ) {
+            console.log( err );
+            res.redirect( "/" );
+        } else {
+            passport.authenticate( "local" )( req, res, () => {
+                renderPage(req,res);
+            });
         }
-        console.log("FAILURE");
-        res.redirect("/");
-    }
-    catch ( err ) 
-    {
-        console.log("Error parsing JSON:", err);
-    }
     });
 });
 
-app.post("/register", (req, res) => {
-    getTasks();
-    getUsers();
-    var isItTrue = 0;
-    var registerUser = req.body["user2"];
-    var registerPassword = req.body["psw2"];
+app.post( "/register", (req, res) => {
     var registerAuth = req.body["auth"];
 
+    console.log( "User " + req.body.username + " is attempting to register" );
     if(registerAuth == "todo2022")
     {
-        for(var i = 0; i < usersLoaded.length; i++)
-        {
-            if(registerUser == usersLoaded[i].username)
-            {
-                isItTrue = 1;
-                res.redirect("/");
-                break;
-            }
-        }
-        if(isItTrue != 1)
-        {
-            usersLoaded.push({"username": registerUser, "password": registerPassword});
-            currentUser = registerUser;
-            addUsers();
-
-            const usersDB = new Users({
-                username: registerUser,
-                password: registerPassword
+        currentUser = req.body.username;
+        Users.register({ username : req.body.username }, 
+            req.body.password, 
+            ( err, user ) => {
+        if ( err ) {
+        console.log( err );
+            res.redirect( "/" );
+        } else {
+            passport.authenticate( "local" , {
+                successRedirect: renderPage(req,res), 
+                failureRedirect: "/",
             });
-
-            usersDB.save();
-
-            res.redirect("/todo");
         }
-        isItTrue = 0;
+        });
     }
     else
-    {
+    {   
         res.redirect("/");
     }
 });
 
-app.post("/addtask",(req,res)=>{
-    getTasks();
-    var taskLength = taskLoaded.length;
-    var addTask = req.body["listText"];
-
-    taskLength++;
-    taskLoaded.push({"id": taskLength, "text": addTask, "state": "unclaimed", "creator": currentUser, "isTaskClaimed":false,"claimingUser":null,"isTaskDone":false,"isTaskCleared":false});
+app.post("/addtask", (req,res)=>{
     currentUser = req.body.username;
-    console.log(currentUser);
-    addTasks();
-
-    res.redirect("/todo");
+    const tempTask = new Tasks({
+        text: req.body.listText,
+        state:"unclaimed",
+        creator: req.body.username,
+        isTaskClaimed: false,
+        claimingUser: "",
+        isTaskDone: false,
+        isTaskCleared: false,
+    })
+    console.log(tempTask);
+    tempTask.save().then(() => {
+        console.log("Task added successfully");
+        renderPage(req, res);
+    });
+    return;
 });
 
-app.post("/claim",(req,res)=>{
-    getTasks();
-    currentUser = req.body["username"];
-    var taskID = req.body["taskID"];
-    var task = taskLoaded.find(task => task.id == taskID);
-    task.claimingUser = currentUser;
-    task.isTaskClaimed = false; 
-    task.state = "unfinished";
-    addTasks();
-    res.redirect("/todo");
+app.post("/claim", async (req,res)=>{
+    var hiddenID = req.body.taskID;
+    currentUser = req.body.username;
+    await Tasks.findOneAndUpdate(
+        {_id: hiddenID},
+        {state:"unfinished",
+        claimingUser: currentUser,
+        isTaskClaimed:true}
+    );
+    renderPage(req, res);
+    return;
 });
 
-app.post("/abandon",(req,res)=>{
-    getTasks();
-    currentUser = req.body["username"];
-    var taskID = req.body["taskID"];
-    var task = taskLoaded.find(task => task.id == taskID);
-    task.claimingUser = null;
-    task.isTaskClaimed = false; 
-    task.state = "unclaimed";
-    addTasks();
-    res.redirect("/todo");
+app.post("/abandon", async (req,res)=>{
+    var hiddenID = req.body.taskID;
+    console.log(hiddenID);
+    currentUser = req.body.username;
+    await Tasks.findOneAndUpdate(
+        {_id: hiddenID},
+        {state:"unclaimed",
+        claimingUser:"",
+        isTaskClaimed:false}
+    );
+    renderPage(req, res);
+    return;
 });
 
-app.post("/finish",(req,res)=>{
-    getTasks();
-    currentUser = req.body["username"];
-    var taskID = req.body["taskID"];
-    var task = taskLoaded.find(task => task.id == taskID);
-    task.isTaskDone = true;
-    task.state = "finished";
-    addTasks();
-    res.redirect("/todo");
+app.post("/finish", async (req,res)=>{
+    var hiddenID = req.body.taskID;
+    console.log(hiddenID);
+    currentUser = req.body.username;
+    await Tasks.findOneAndUpdate(
+        {_id: hiddenID},
+        {state:"finished",
+        isTaskDone:true}
+    );
+    renderPage(req, res);
+    return;
 });
 
-app.post("/unfinish",(req,res)=>{
-    getTasks();
-    currentUser = req.body["username"];
-    var taskID = req.body["taskID"];
-    var task = taskLoaded.find(task => task.id == taskID);
-    task.isTaskDone = false;
-    task.state = "unfinished";
-    addTasks();
-    res.redirect("/todo");
+app.post("/unfinish", async (req,res)=>{
+    var hiddenID = req.body.taskID;
+    console.log(hiddenID);
+    currentUser = req.body.username;
+    await Tasks.findOneAndUpdate(
+        {_id: hiddenID},
+        {isTaskDone:false,
+        state:"unfinished"}
+    );
+    renderPage(req, res);
+    return;
 });
 
-app.post("/purge",(req,res)=>{
-    getTasks();
-    currentUser = req.body["username"];
-    for(var i = 0; i < taskLoaded.length; i++)
-    {
-        if(taskLoaded[i].isTaskDone == true)
-        {
-            taskLoaded[i].isTaskCleared = true
-        }
-    }
-    addTasks();
-    res.redirect("/todo");
+app.post("/purge", async (req, res) => {
+    currentUser = req.body.username;
+    await Tasks.deleteMany({state:"finished"});
+    renderPage(req,res);
+    return;
 });
+
+//-------------------------------------------------------------------
 
 /*const task1 = new Tasks({
     text: "Cleaning room",
@@ -309,4 +291,15 @@ const task5 = new Tasks({
     isTaskDone: true,
     isTaskCleared: false,
 });
-task5.save();*/
+task5.save();
+
+const user1 = new Users({
+    username:   "willow",
+    password:   "willow2001",
+});
+user1.save();
+const user2 = new Users({
+    username:   "aryan",
+    password:   "aryan2002",
+});
+user2.save();*/

@@ -6,5 +6,7 @@
             <input onChange="this.form.submit()" checked class="form-check-input mt-0" checkbox type="checkbox">
         </form>
     </div>
-    <input type="text" disabled class="form-control underline" style="text-decoration:line-through" placeholder="<%- task.text %>" aria-label="Text input with checkbox">
+    <input type="text" name="hiddenID" id="" hidden value="<%= task._id %>">
+    <input type="hidden" name="state" value="<%-task.state%>" >
+    <input type="text" disabled class="form-control underline" style="text-decoration:line-through" id="task" name="task"  placeholder="<%- task.text %>" aria-label="Text input with checkbox">
 </div>

@@ -84,7 +84,7 @@ app.get("/", function (req, res) {
 
 //--------------------------------------------------------------------------------
 
-function renderPage(req,res)
+function loadPage(req,res)
 {
     Tasks.find((err, tasks) => {
         if (err) 
@@ -124,7 +124,7 @@ app.post( "/login", ( req, res ) => {
             res.redirect( "/" );
         } else {
             passport.authenticate( "local" )( req, res, () => {
-                renderPage(req,res);
+                loadPage(req,res);
             });
         }
     });
@@ -145,7 +145,7 @@ app.post( "/register", (req, res) => {
             res.redirect( "/" );
         } else {
             passport.authenticate( "local" , {
-                successRedirect: renderPage(req,res), 
+                successRedirect: loadPage(req,res), 
                 failureRedirect: "/",
             });
         }
@@ -171,7 +171,7 @@ app.post("/addtask", (req,res)=>{
     console.log(tempTask);
     tempTask.save().then(() => {
         console.log("Task added successfully");
-        renderPage(req, res);
+        loadPage(req, res);
     });
     return;
 });
@@ -185,7 +185,7 @@ app.post("/claim", async (req,res)=>{
         claimingUser: currentUser,
         isTaskClaimed:true}
     );
-    renderPage(req, res);
+    loadPage(req, res);
     return;
 });
 
@@ -199,7 +199,7 @@ app.post("/abandon", async (req,res)=>{
         claimingUser:"",
         isTaskClaimed:false}
     );
-    renderPage(req, res);
+    loadPage(req, res);
     return;
 });
 
@@ -212,7 +212,7 @@ app.post("/finish", async (req,res)=>{
         {state:"finished",
         isTaskDone:true}
     );
-    renderPage(req, res);
+    loadPage(req, res);
     return;
 });
 
@@ -225,16 +225,20 @@ app.post("/unfinish", async (req,res)=>{
         {isTaskDone:false,
         state:"unfinished"}
     );
-    renderPage(req, res);
+    loadPage(req, res);
     return;
 });
 
-app.post("/purge", async (req, res) => {
+app.post("/purge", (req, res) => {
     currentUser = req.body.username;
-    await Tasks.deleteMany({state:"finished"});
-    renderPage(req,res);
+    Tasks.updateMany({isTaskDone: true},{isTaskCleared: true}, null, (error, res) => {
+        if(error) {
+            console.log("error");
+        }
+    });
+    loadPage(req, res);
     return;
-});
+;});
 
 //-------------------------------------------------------------------
 
@@ -291,9 +295,9 @@ const task5 = new Tasks({
     isTaskDone: true,
     isTaskCleared: false,
 });
-task5.save();
+task5.save();*/
 
-const user1 = new Users({
+/*const user1 = new Users({
     username:   "willow",
     password:   "willow2001",
 });

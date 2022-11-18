@@ -6,6 +6,7 @@ const session = require("express-session")
 const passport = require("passport")
 const passportLocalMongoose = require("passport-local-mongoose")
 require("dotenv").config();
+process.env.DB_HOST
 ////////////////////////////////////////////////////////////////////
 
 
@@ -107,7 +108,12 @@ function loadPage(req,res)
 
 app.get("/logout",(req,res)=>{
     currentUser = null;
-    res.redirect("/");
+    req.logout(function(err) {
+        if (err) { 
+            return next(err); 
+        }
+        res.redirect('/');
+    });
 });
 
 app.post( "/login", ( req, res ) => {
@@ -134,7 +140,7 @@ app.post( "/register", (req, res) => {
     var registerAuth = req.body["auth"];
 
     console.log( "User " + req.body.username + " is attempting to register" );
-    if(registerAuth == "todo2022")
+    if(process.env.AUTHENTICATE == registerAuth)
     {
         currentUser = req.body.username;
         Users.register({ username : req.body.username }, 
